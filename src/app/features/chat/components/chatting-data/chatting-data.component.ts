@@ -44,28 +44,33 @@ export class ChattingDataComponent {
   }
 
   ////////////////////// start update content & send content////////////////////////
-  // messageContent: string = '';
-  // updateContent(event: Event): void {
-  //   const target = event.target as HTMLElement;
-  //   this.messageContent = target.innerText.trim();
-  // }
+  messageContent: string = '';
+  updateContent(event: Event): void {
+    const target = event.target as HTMLDivElement;
+    this.messageContent = target.textContent?.trim() || ''; // ইনপুট আপডেট করা
 
-  // sendMessage(): void {
-  //   const chattingData = {
-  //     chatId: this.chat.chatId,
-  //     content: this.messageContent,
-  //     messageType: 'text',
-  //   };
+    // যদি ডিভ ফাঁকা থাকে, তাহলে একে পরিষ্কারভাবে চেক করুন
+    if (this.messageContent === '') {
+      target.textContent = ''; // পুরোপুরি ফাঁকা করুন
+    }
+  }
 
-  //   this.chatService.sendMessage(chattingData).subscribe({
-  //     next: (response) => {
-  //       this.messageContent = '';
-  //     },
-  //     error: (error) => {
-  //       console.error('Error sending message:', error);
-  //     },
-  //   });
-  // }
+  sendMessage(): void {
+    const chattingData = {
+      chatId: this.chat.chatId,
+      content: this.messageContent,
+      messageType: 'text',
+    };
+
+    this.chatService.sendMessage(chattingData).subscribe({
+      next: (response) => {
+        this.messageContent = '';
+      },
+      error: (error) => {
+        console.error('Error sending message:', error);
+      },
+    });
+  }
 
   ////////////////////// End update content & send content////////////////////////
 }

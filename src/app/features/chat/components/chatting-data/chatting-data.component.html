@@ -1,4 +1,4 @@
-<div class="chatting-details">
+<!-- <div class="chatting-details">
 
     <div class="chatting-details-topber">
         <div class="chatting-details-profile-img">
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <!-- <div class="chatting-details-bottomber">
+    <div class="chatting-details-bottomber">
         <div class="chatting-details-add-item"><mat-icon>add</mat-icon></div>
         <div class="chatting-details-text">
             <div contenteditable="true" data-placeholder="Type here..." (input)="updateContent($event)"></div>
@@ -33,68 +33,54 @@
         <div class="chatting-details-voice-msg" [hidden]="messageContent">
             <mat-icon>keyboard_voice</mat-icon>
         </div>
-    </div> -->
+    </div>
 
-</div>
+</div> -->
 
 
 <ng-template #noChats>
     <p>No chats available.</p>
 </ng-template>
 
-<!-- <div class="main-div">
+<div class="main-div">
 
-    <div class="div11">
-        Header
-    </div>
-
-    <div class="div22">
-        Content
-        <div>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magnam tempora praesentium? Velit
-                perferendis explicabo odit voluptates fugiat quasi dolorum similique natus, consectetur, tenetur ut
-                atque
-                sint modi molestias iusto? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam deleniti
-                veniam
-                cumque distinctio earum, debitis assumenda consequuntur autem minima laboriosam ab, illo maiores velit
-                laborum cum accusantium, in similique quia. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Earum
-                aliquam saepe dicta ipsa maiores iste repellat dolorem quos deleniti harum at quae, dignissimos totam
-                distinctio repellendus nisi eum laboriosam quas! Lorem ipsum dolor sit, amet consectetur adipisicing
-                elit.
-                Atque eligendi ab sint veniam maxime porro eveniet sunt illo temporibus tempore asperiores accusantium
-                accusamus mollitia obcaecati, excepturi tempora optio blanditiis hic? Lorem ipsum dolor sit amet
-                consectetur
-                adipisicing elit. Consectetur officia ipsa soluta, voluptates ipsam dolore laboriosam facere blanditiis
-                in
-                reprehenderit, nemo esse iusto distinctio autem amet, perspiciatis corrupti quo! Recusandae. Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit. Incidunt perferendis unde ullam rem! Nihil dolor corporis
-                voluptas incidunt fuga iusto? Corrupti animi dolorum reiciendis debitis inventore voluptates quas quidem
-                rem.</h2>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magnam tempora praesentium? Velit
-                perferendis explicabo odit voluptates fugiat quasi dolorum similique natus, consectetur, tenetur ut
-                atque
-                sint modi molestias iusto? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam deleniti
-                veniam
-                cumque distinctio earum, debitis assumenda consequuntur autem minima laboriosam ab, illo maiores velit
-                laborum cum accusantium, in similique quia. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Earum
-                aliquam saepe dicta ipsa maiores iste repellat dolorem quos deleniti harum at quae, dignissimos totam
-                distinctio repellendus nisi eum laboriosam quas! Lorem ipsum dolor sit, amet consectetur adipisicing
-                elit.
-                Atque eligendi ab sint veniam maxime porro eveniet sunt illo temporibus tempore asperiores accusantium
-                accusamus mollitia obcaecati, excepturi tempora optio blanditiis hic? Lorem ipsum dolor sit amet
-                consectetur
-                adipisicing elit. Consectetur officia ipsa soluta, voluptates ipsam dolore laboriosam facere blanditiis
-                in
-                reprehenderit, nemo esse iusto distinctio autem amet, perspiciatis corrupti quo! Recusandae. Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit. Incidunt perferendis unde ullam rem! Nihil dolor corporis
-                voluptas incidunt fuga iusto? Corrupti animi dolorum reiciendis debitis inventore voluptates quas quidem
-                rem.</h2>
+    <div class="chatting-details-topberPart">
+        <div class="chatting-details-profile-img">
+            <img width="50px"
+                src="https://thumbs.dreamstime.com/b/portrait-young-handsome-happy-man-wearing-glasses-casual-smart-blue-clothing-yellow-color-background-square-composition-200740125.jpg" />
+            <p style="margin: 0; font-weight: 500; ">{{ chat.name }}</p>
+        </div>
+        <div class="chatting-details-topber-icon">
+            <mat-icon>videocam</mat-icon>
+            <mat-icon>call</mat-icon>
+            <mat-icon>more_vert</mat-icon>
         </div>
     </div>
 
-    <div class="div33">
-        Navber
+    <div class="chatting-details-messagesPart" *ngIf="chatDetails?.length > 0; else noChats">
+        <div *ngFor="let chatting of chatDetails" class="chatting-details-message-div">
+            <div *ngIf="currentUser" [ngClass]="{
+                  'chatting-details-message-self': chatting.senderId === currentUser.userId,
+                  'chatting-details-message-reciver': chatting.senderId !== currentUser.userId
+                }">
+                <p style="margin: 0;">{{ chatting.content }}</p>
+            </div>
+        </div>
     </div>
-</div> -->
+
+    <div class="chatting-details-bottomberPart">
+        <div class="chatting-details-add-item"><mat-icon>add</mat-icon></div>
+        <div class="chatting-details-text">
+            <div contenteditable="true" [attr.data-placeholder]="!messageContent ? 'Type here message...' : null"
+                (input)="updateContent($event)">
+            </div>
+        </div>
+
+        <div [hidden]="!messageContent">
+            <mat-icon (click)="sendMessage()" style="cursor: pointer;">send</mat-icon>
+        </div>
+        <div class="chatting-details-voice-msg" [hidden]="messageContent">
+            <mat-icon>keyboard_voice</mat-icon>
+        </div>
+    </div>
+</div>

@@ -36,4 +36,23 @@ export class ChatService {
     });
     return this.http.get<any>(`${this.singleChatApi}/${chatId}`, { headers });
   }
+
+  ////////////////////// start update content & send content////////////////////////
+  private sendMapiUrl = 'http://localhost:5000/api/v1/message/send-message'; // আপনার API URL এখানে সেট করুন
+  sendMessage(chattingData: {
+    chatId: string;
+    content: string;
+    messageType: string;
+  }): Observable<any> {
+    console.log(chattingData, 'chattingData');
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      console.error('No token found!');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `${token}`,
+    });
+    return this.http.post(this.sendMapiUrl, chattingData, { headers }); // POST রিকোয়েস্ট পাঠাচ্ছে
+  }
+  ////////////////////// End update content & send content////////////////////////
 }
