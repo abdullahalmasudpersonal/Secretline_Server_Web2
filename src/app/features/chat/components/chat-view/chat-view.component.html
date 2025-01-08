@@ -1,0 +1,74 @@
+<!-- <div class="chattingUser">
+    <div>
+        <img class="profileimg"
+            src="https://thumbs.dreamstime.com/b/portrait-young-handsome-happy-man-wearing-glasses-casual-smart-blue-clothing-yellow-color-background-square-composition-200740125.jpg"
+            width="50px" height="50px" />
+    </div>
+    <div class="chattingUserInfo">
+        <div style="width: 100%; padding-right: 10px;">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <p>Tanvir Saki</p>
+                <p><small>12/14/25</small></p>
+            </div>
+            <p>https://www.facebook.com/share/vssfs...</p>
+        </div>
+    </div>
+</div>
+
+<div class="chattingUser">
+    <div>
+        <img class="profileimg"
+            src="https://thumbs.dreamstime.com/b/portrait-young-handsome-happy-man-wearing-glasses-casual-smart-blue-clothing-yellow-color-background-square-composition-200740125.jpg"
+            width="50px" height="50px" />
+    </div>
+    <div class="chattingUserInfo">
+        <div style="width: 100%; padding-right: 10px;">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <p>Tanvir Saki</p>
+                <p><small>12/14/25</small></p>
+            </div>
+            <p>https://www.facebook.com/share/vssfs...</p>
+        </div>
+    </div>
+</div>
+
+<div class="chattingUser">
+    <div>
+        <img class="profileimg"
+            src="https://thumbs.dreamstime.com/b/portrait-young-handsome-happy-man-wearing-glasses-casual-smart-blue-clothing-yellow-color-background-square-composition-200740125.jpg"
+            width="50px" height="50px" />
+    </div>
+    <div class="chattingUserInfo">
+        <div style="width: 100%; padding-right: 10px;">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <p>Tanvir Saki</p>
+                <p><small>12/14/25</small></p>
+            </div>
+            <p>https://www.facebook.com/share/vssfs...</p>
+        </div>
+    </div>
+</div> -->
+
+<div *ngIf="chatData?.length > 0; else loading">
+    <div *ngFor="let chat of chatData" class="chattingUser" [class.active]="chat === selectedChatUser"
+        (click)="onChatClick(chat)">
+        <div>
+            <img class="profileimg"
+                src="https://thumbs.dreamstime.com/b/portrait-young-handsome-happy-man-wearing-glasses-casual-smart-blue-clothing-yellow-color-background-square-composition-200740125.jpg"
+                width="50px" height="50px" />
+        </div>
+        <div class="chattingUserInfo">
+            <div style="width: 100%; padding-right: 10px;">
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <p>{{chat.name}}</p>
+                    <p><small>12/14/25</small></p>
+                </div>
+                <p>{{chat.lastMessage.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <p>Loading user data...</p>
+</ng-template>

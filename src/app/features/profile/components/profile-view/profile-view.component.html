@@ -1,0 +1,11 @@
+<div *ngIf="userData; else loading">
+    <h3>Profile</h3>
+    <!-- user image -->
+    <img [src]="userData.profileImg" alt="User Profile Picture" width="150" height="150" />
+    <p><strong>Name:</strong> {{ userData.name }}</p>
+    <p><strong>email:</strong> {{ userData.email }}</p>
+</div>
+
+<ng-template #loading>
+    <p>Loading user data...</p>
+</ng-template>

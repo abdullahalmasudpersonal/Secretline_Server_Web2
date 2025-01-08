@@ -1,0 +1,58 @@
+<app-register *ngIf="!isUserAvailable" (userCreated)="updateUserStatus($event)"></app-register>
+
+<div class="container" *ngIf="isUserAvailable; else noUser">
+
+  <div class="mainManu">
+    <div style="margin-top: 10px;">
+      <div>
+        <mat-icon (click)="selectMenu('home')" [class.active]="selectedMenu === 'home'">home</mat-icon>
+      </div>
+      <div>
+        <mat-icon (click)="selectMenu('chat')" [class.active]="selectedMenu === 'chat'">chat</mat-icon>
+      </div>
+      <div>
+        <mat-icon (click)="selectMenu('group')" [class.active]="selectedMenu === 'group'">group</mat-icon>
+      </div>
+    </div>
+    <div style="margin-bottom: 5px;">
+      <div><mat-icon (click)="selectMenu('profile')"
+          [class.active]="selectedMenu === 'profile'">account_circle</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="sideber">
+
+    <div class="sideberChatPart" *ngIf="selectedMenu === 'home'">
+      <div class="sideberChatTopPart">
+        <h2 style="margin: 0;">Chats</h2>
+        <div>
+          <mat-icon style="color: rgb(78, 22, 124); margin-right: 15px;">add_box</mat-icon>
+          <mat-icon style="color: rgb(94, 17, 156);">more_vert
+          </mat-icon>
+        </div>
+      </div>
+      <div class="sideberChatListPart">
+        <app-chat-view (selectChat)="onChatSelected($event)" />
+      </div>
+    </div>
+
+    <div class="sideberChatPart" *ngIf="selectedMenu === 'profile'">
+      <app-profile-view />
+    </div>
+  </div>
+
+  <div class="chatContent" *ngIf="detailsView">
+    <app-chatting-data [chat]="selectedChat" />
+  </div>
+
+  <div class="chatDefaultContent" *ngIf="!detailsView">
+    <h1>Default Content</h1>
+    <p>Select an item from the menu to see details here.</p>
+  </div>
+
+</div>
+
+<ng-template #noUser>
+  <p>User registration form is displayed</p>
+</ng-template>
